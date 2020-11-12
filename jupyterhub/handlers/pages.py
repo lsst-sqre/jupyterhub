@@ -39,7 +39,7 @@ class RootHandler(BaseHandler):
 
     def get(self):
         user = self.current_user
-        self.log.error("Current user: {}".format(self._current_user))
+        self.log.error("Current user: {}".format(self.current_user))
         if self.default_url:
             url = self.default_url
         elif user:
@@ -235,7 +235,8 @@ class SpawnHandler(BaseHandler):
         spawner = user.spawners[server_name]
 
         if spawner.ready:
-            raise web.HTTPError(400, "%s is already running" % (spawner._log_name))
+            raise web.HTTPError(400, "%s is already running" %
+                                (spawner._log_name))
         elif spawner.pending:
             raise web.HTTPError(
                 400, "%s is pending %s" % (spawner._log_name, spawner.pending)
