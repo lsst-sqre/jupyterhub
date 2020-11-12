@@ -39,6 +39,7 @@ class RootHandler(BaseHandler):
 
     def get(self):
         user = self.current_user
+        self.log.error("Current user: {}".format(self._current_user))
         if self.default_url:
             url = self.default_url
         elif user:
@@ -155,7 +156,8 @@ class SpawnHandler(BaseHandler):
         # spawner is active, redirect back to get progress, etc.
         if spawner.ready:
             self.log.info("Server %s is already running", spawner._log_name)
-            next_url = self.get_next_url(user, default=user.server_url(server_name))
+            next_url = self.get_next_url(
+                user, default=user.server_url(server_name))
             self.redirect(next_url)
             return
 
