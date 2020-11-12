@@ -48,7 +48,8 @@ from ..utils import maybe_future
 from ..utils import url_path_join
 
 # pattern for the authentication token header
-auth_header_pat = re.compile(r'^(?:token|bearer)\s+([^\s]+)$', flags=re.IGNORECASE)
+auth_header_pat = re.compile(
+    r'^(?:token|bearer)\s+([^\s]+)$', flags=re.IGNORECASE)
 
 # mapping of reason: reason_message
 reasons = {
@@ -649,6 +650,7 @@ class BaseHandler(RequestHandler):
             # default URL after login
             # if self.redirect_to_server, default login URL initiates spawn,
             # otherwise send to Hub home page (control panel)
+            self.log.error("Current user: {}".format(user))
             if user and self.redirect_to_server:
                 if user.spawner.active:
                     # server is active, send to the user url
