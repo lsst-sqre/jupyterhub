@@ -7,7 +7,7 @@ version_info = (
     3,
     0,
     "",  # release (b1, rc1, or "" for final or dev)
-    "dev",  # dev or nothing for beta/rc/stable releases
+    "devajt",  # dev or nothing for beta/rc/stable releases
 )
 
 # pep 440 version: no dot before beta/rc, but before .dev
@@ -61,7 +61,8 @@ def _check_version(hub_version, singleuser_version, log):
             key = '%s-%s' % (hub_version, singleuser_version)
             global _version_mismatch_warning_logged
             if _version_mismatch_warning_logged.get(key):
-                do_log = False  # We already logged this warning so don't log it again.
+                # We already logged this warning so don't log it again.
+                do_log = False
             else:
                 log_method = log.warning
                 extra = " This could cause failure to authenticate and result in redirect loops!"
